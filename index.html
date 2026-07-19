@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数说虎扑：24小时社区热度与话题洞察</title>
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans CJK SC", sans-serif;
+        }
+
+        body {
+            background-color: #f5f7f9;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        /* 页眉设计 - 虎扑红主题 */
+        header {
+            background: linear-gradient(135deg, #c60a1d 0%, #a00817 100%);
+            color: #ffffff;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 页面主体布局 */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* 数据新闻导语区 */
+        .intro-section {
+            background-color: #ffffff;
+            border-left: 5px solid #c60a1d;
+            padding: 20px 25px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .intro-section h2 {
+            font-size: 1.3rem;
+            color: #c60a1d;
+            margin-bottom: 10px;
+        }
+
+        /* 数据核心指标卡片 (KPI Cards) */
+        .kpi-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .kpi-card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 4px solid #c60a1d;
+        }
+
+        .kpi-title {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .kpi-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .kpi-sub {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        /* 图表展示卡片 */
+        .chart-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .chart-header {
+            background-color: #fcfcfc;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eeeeee;
+            display: flex;
+            align-items: center;
+        }
+
+        .chart-header .badge {
+            background-color: #c60a1d;
+            color: #fff;
+            padding: 3px 8px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        .chart-header h3 {
+            font-size: 1.15rem;
+            color: #222;
+        }
+
+        .chart-body {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 嵌入Echarts HTML的 iframe 样式 */
+        .chart-iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            background-color: transparent;
+        }
+
+        /* 词云图图片样式 */
+        .wordcloud-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 450px;
+            border-radius: 4px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* 深度分析文章区 */
+        .analysis-section {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            margin-bottom: 5px;
+        }
+
+        .analysis-section h2 {
+            font-size: 1.5rem;
+            color: #222;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eeeeee;
+        }
+
+        .analysis-section p {
+            font-size: 1rem;
+            color: #444;
+            margin-bottom: 15px;
+            text-indent: 2em; /* 首行缩进 */
+            text-align: justify;
+        }
+
+        .highlight-text {
+            color: #c60a1d;
+            font-weight: bold;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: #222222;
+            color: #aaaaaa;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+            font-size: 0.85rem;
+        }
+
+        footer p {
+            margin-bottom: 5px;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .chart-iframe {
+                height: 380px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 页眉 -->
+    <header>
+        <h1>数说虎扑：24小时社区热度与话题洞察</h1>
+        <p>基于虎扑体育各大核心专区24小时内的新闻发布量、互动回复数据及热点话题的文本挖掘</p>
+    </header>
+
+    <div class="container">
+
+        <!-- 新闻导语区 -->
+        <section class="intro-section">
+            <h2>【数据前言】</h2>
+            <p>作为中国最具人气的体育垂类社区之一，虎扑（Hupu）不仅是体育资讯的集散地，更是球迷情感宣泄与深度讨论的“主战场”。本数据新闻项目通过抓取24小时内虎扑各专区的数据，试图解答：哪类体育赛事是社区里的“内容产出大户”？又是哪些话题能激起球迷最强烈的互动欲望？</p>
+        </section>
+
+        <!-- KPI 核心指标卡片 -->
+        <section class="kpi-container">
+            <div class="kpi-card">
+                <div class="kpi-title">24小时内最活跃专区 (新闻量)</div>
+                <div class="kpi-value">国际足球资讯</div>
+                <div class="kpi-sub">累计产出新闻 171 篇</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">单帖平均回复之王 (互动深度)</div>
+                <div class="kpi-value">湿乎乎的话题</div>
+                <div class="kpi-sub">平均每贴回复达 195.7 次</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">单帖最高热度纪录</div>
+                <div class="kpi-value">2,066 回复</div>
+                <div class="kpi-sub">诞生于“国际足球资讯”专区</div>
+            </div>
+        </section>
+
+        <!-- 图表卡片 1：新闻数量饼状图 -->
+        <section class="chart-card">
+            <div class="chart-header">
+                <span class="badge">分布维度</span>
+                <h3>各专区新闻数量分布（供给端）</h3>
+            </div>
+            <div class="chart-body">
+                <!-- 链接你的饼状图 HTML -->
+                <iframe src="pie_chart.html" class="chart-iframe"></iframe>
+            </div>
+        </section>
+
+        <!-- 图表卡片 2：回复量一体化条形图 -->
+        <section class="chart-card">
+            <div class="chart-header">
+                <span class="badge">互动维度</span>
+                <h3>各专区回复量数据对比（总回复、平均回复、最大回复）</h3>
+            </div>
+            <div class="chart-body">
+                <!-- 链接你的条形图 HTML -->
+                <iframe src="bar_chart.html" class="chart-iframe"></iframe>
+            </div>
+        </section>
+
+        <!-- 图表卡片 3：词云图 -->
+        <section class="chart-card">
+            <div class="chart-header">
+                <span class="badge">内容维度</span>
+                <h3>24小时热门话题词云图</h3>
+            </div>
+            <div class="chart-body">
+                <!-- 链接你的词云图图片 -->
+                <img src="wordcloud.png" alt="24小时话题词云图" class="wordcloud-img">
+            </div>
+        </section>
+
+        <!-- 数据深度分析 -->
+        <section class="analysis-section">
+            <h2>数据观察：高产出的“国际足球”与深互动的“篮球论坛”</h2>
+            <p>通过对24小时内的数据进行观察，我们发现了一个非常有趣的“冷热分化”现象。首先，在<strong>新闻供给侧</strong>，<span class="highlight-text">国际足球资讯</span>以绝对优势（171篇新闻）占据了内容产出的半壁江山，这得益于国际足球庞大的赛事基数与资讯源。然而，高产出并不等同于高粘性，其平均回复量仅为85.6，属于中等水平。</p>
+            
+            <p>相比之下，<strong>篮球板块展现出了极强的内容吸粉能力和用户互动黏性</strong>。作为篮球迷核心聚集地的<span class="highlight-text">“湿乎乎的话题”</span>专区，虽然24小时内仅产出了7篇新闻（帖子），但其总回复量却高达1,370次，<span class="highlight-text">平均回复量更是高达195.7</span>，高居全站第一。这表明篮球论坛的用户更倾向于在少数焦点话题下进行深度的“盖楼”讨论和观点交锋。</p>
+            
+            <p>此外，电竞板块（英雄联盟、王者荣耀）展现出“高产出、低互动”的特征（平均回复仅在11~40左右），表明在传统的体育垂类社区中，核心用户群体依然牢固地被足球和篮球所吸引。词云图的分析也进一步印证了这一点，热点词汇依然高度围绕核心球星和当日热赛展开。</p>
+        </section>
+
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>© 2026 大数据挖掘与数据新闻 | 数据采集自：虎扑体育社区</p>
+        <p>数据范围：2026-6-27至2026-6-28</p>
+        <p>学生：尹启豪 | 学号: 42311085</p>
+    </footer>
+
+</body>
+</html>

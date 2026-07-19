@@ -1,0 +1,102 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=pie-simple&code=jZTva9NAGMff76-4NxKFIu1mHVZ80U72ShAUUZC9uLaX7jDthct1OmTQug6VbkPZcGqdMsdeiLbdFKXtHP4z-XH5L7wkzWUbaddw5JJ7Ps_3eZ5c7iE6w6QCboHnUwAwzDSU8R_FC3rGMkC5h1REEQVEBRA8RHkDM6QkfMKo5ofQPHyCwG3I4NCiIdVbLqAKQ1QRSyveOiNEY1iXASgulRAVnJAsS0pDJVQphhChWIgIZglRhgtQOxvBm6SngQRsZMBjnwj8AajAsqhJyRYKyDDAPCXloYTIYFn3TDoOKwKAwiKuCg0lnbwkF4uislDWlwZLUKsK19RsKhEGsFon7oc1_ueX82aV_27wTlcJ0jrnMzMtXZxu5yI40nc2m7y2xjf2ea0WD0_PSpg3j9xWg9e3ndaXeDh1XcJzuazZ27LWByPItCTNXluUGdQYD9-IUgi-RHfX_fp-pHaEO8e71qdD--iFsz0i46g6u__P7G-K4XxsBAHiPa5FJT7IZe-MK3LmlPg7czAYx0YbaLcP-N4639sxe8dW_6db37rIw_32w3o1Vv3Ujq-2nfr3yVh7v2N_3nGafyfDea3u9g8nTEP8pSdvJ2Otg5f26w3JDtGF0AeV9UVoYHG-wtMJgHf477PlqPEEl7EIi-RpTquKBpFKRkFDy11VNRB7lAExtjmiEa-v0FIeXk4mBOKPq-krXq8IrjC3YPbuC1MrN_8D&enc=deflate
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-gl/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-stat/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-graph-modularity/dist/echarts-graph-modularity.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  title: {
+    text: '虎扑体育',
+    subtext: '各专区新闻数量分布',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      name: 'Access From',
+      type: 'pie',
+      radius: '50%',
+      data: [
+        { value: 171, name: '国际足球资讯' },
+        { value: 32, name: '篮球资讯' },
+        { value: 31, name: '王者荣耀' },
+        { value: 27, name: '英雄联盟' },
+        { value: 16, name: 'CBA专区' },
+        { value: 15, name: '中国足球' },
+        { value: 9, name: '足球话题区' },
+        { value: 9, name: '绝地求生' },
+        { value: 7, name: '湿乎乎的话题' },
+        { value: 4, name: 'CUBAL专区' },
+        { value: 3, name: '湖人专区' },
+        { value: 2, name: '步行街主干道' },
+        { value: 2, name: '马刺专区' },
+        { value: 1, name: '热火专区' },
+        { value: 1, name: '森林狼专区' },
+        { value: 1, name: '老鹰专区' },
+        { value: 1, name: '篮网专区' },
+        { value: 1, name: '奇才专区' }
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
